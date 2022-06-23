@@ -1,3 +1,4 @@
+//using EmployeePayrollADO.NET;
 using EmployeePayRollADO.NET;
 using NUnit.Framework;
 
@@ -17,7 +18,7 @@ namespace EmployeePayrollADO
         {
             int expected = 1;
             int actual = employee.UpdateSalary();
-            Assert.AreEqual(actual, expected);
+            Assert.That(expected, Is.EqualTo(actual));
         }
 
         [Test]
