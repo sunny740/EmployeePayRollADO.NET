@@ -197,5 +197,32 @@ namespace EmployeePayRollADO.NET
                 "Taxable Pay" + employeeData.Taxable_Pay +
                 "Net Pay" + employeeData.Net_Pay);
         }
+        public int RemoveEmployee()
+        {
+            try
+            {
+                using (sqlConnection)
+                {
+                    SqlCommand command = new SqlCommand("ado.DeleteDetails", sqlConnection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ID", employeeData.ID);
+                    sqlConnection.Open();
+                    int result = command.ExecuteNonQuery();
+
+                    if (result != 0)
+                    {
+                        Console.WriteLine("Contact is deleted");
+                        return result;
+                    }
+                    else
+                        return result;
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw new EmployeeException(EmployeeException.ExceptionType.No_data_found, "No Data Found");
+            }
+        }
     }
 }
